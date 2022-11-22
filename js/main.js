@@ -5,11 +5,12 @@ function User(name, surname, age, isMale, email, isSubscribed) {
   this.isMale = isMale;
   this.email = email;
   this.isSubscribed = isSubscribed;
-  // прописати метод getFullName() (повертає рядок з повним ім'ям) для користувача. Загальну логіку (тобто зазначений метод) винести на прототип.
-  this.getFullName = function () {
-    return `${this.firstName} ${this.lastName}`;
-  };
 }
+
+// прописати метод getFullName() (повертає рядок з повним ім'ям) для користувача. Загальну логіку (тобто зазначений метод) винести на прототип.
+User.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+};
 
 const users = [];
 
@@ -28,11 +29,13 @@ for (let i = 0; i < 100; i++) {
 // console.dir(users);
 
 // 1.2 Отримати масив повних імен осіб жіночої статі шкільного віку (6 – 18 років).
-const schoolGirlsNamesArray = users.filter(
+const sortedArray = users.filter(
   (el) => el.age >= 6 && el.age <= 18 && !el.isMale
 );
 
-console.group('SchoolGirs fullnames');
+const schoolGirlsNamesArray = sortedArray.map((el) => el.getFullName());
+
+console.group('SchoolGirls fullnames');
 console.dir(schoolGirlsNamesArray);
 console.groupEnd();
 
